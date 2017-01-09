@@ -34,9 +34,13 @@
 
 - name: create zabbix database
   command: mysql -u root -e \
-           "create database zabbix character set utf8 collate utf8_bin;"
+           "create database zabbix character set utf8 collate utf8_bin;" -e \
+           "grant all privileges on zabbix.* to zabbix@localhost identified by '{{zabbix_password}}';"
   when: result.stdout != "zabbix"
 
-- name: permission setting for zabbix
-  command: mysql -u root -e \
-           "grant all privileges on zabbix.* to zabbix@localhost identified by {{zabbix_password}};"
+- name: add tables
+  command: mysql -u root zabbix < /usr/share/doc/zabbix-server-mysql-2.4.8/create/{{ item }}
+  with_items:
+    - schema.sql
+    - images.sql
+    - data.sql
