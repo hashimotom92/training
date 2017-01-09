@@ -38,6 +38,10 @@
            "grant all privileges on zabbix.* to zabbix@localhost identified by '{{zabbix_password}}';"
   when: result.stdout != "zabbix"
 
+- name: check zabbix tables
+  shell: mysql -u root -e "show tables from zabbix;"
+  register: result2
+
 - name: add tables
   shell: mysql -u root zabbix < {{ item }}
   args:
@@ -46,3 +50,4 @@
     - schema.sql
     - images.sql
     - data.sql
+  when: result2.rc == 1
