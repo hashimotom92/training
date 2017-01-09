@@ -1,0 +1,4 @@
+---
+
+- name:set locale to /etc/cloud/cloud.cfg
+  lineinfile: 'dest=/etc/cloud/cloud.cfg line="locale: {{locale}}"'
