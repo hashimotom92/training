@@ -2,3 +2,5 @@
  zone: "Asia/Tokyo"
  repo_upgrade: "none"
  zoneinfo_path: "/usr/share/zoneinfo/Asia/Tokyo"
+
+ zabbix_version: "2.4"
