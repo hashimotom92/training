@@ -1,22 +1,28 @@
 ---
 
- - name: zabbix yum repository
-   template:
-     src: zabbix.repo.j2
-     dest: /etc/yum.repos.d/zabbix.repo
+- name: zabbix yum repository
+  template:
+    src: zabbix.repo.j2
+    dest: /etc/yum.repos.d/zabbix.repo
 
- - name: zabbix package install
-   yum: name={{ item }}
-   with_items:
-     - zabbix-server-mysql
-     - zabbix-web-mysql
-     - zabbix-web-japanese
-     - zabbix-agent
+- name: zabbix package install
+  yum: name={{ item }}
+  with_items:
+    - zabbix-server-mysql
+    - zabbix-web-mysql
+    - zabbix-web-japanese
+    - zabbix-agent
 
- - name: mysqld install
-   yum:
-     name: "{{ item }}"
-     state: latest
-   with_items:
-     - mysql56-server
-     - mysql56
+- name: mysqld install
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - mysql56-server
+    - mysql56
+
+- name: mysql-server service start
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
