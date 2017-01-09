@@ -39,7 +39,9 @@
   when: result.stdout != "zabbix"
 
 - name: add tables
-  command: mysql -u root zabbix < /usr/share/doc/zabbix-server-mysql-2.4.8/create/{{ item }}
+  shell: mysql -u root zabbix < {{ item }}
+  args:
+    chdir: /usr/share/doc/zabbix-server-mysql-2.4.8/create/
   with_items:
     - schema.sql
     - images.sql
