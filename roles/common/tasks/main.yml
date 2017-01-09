@@ -20,4 +20,4 @@
     force=yes
 
 - name: yum update
-  yum: state=latest name=*}
+  yum: state=latest name=*
