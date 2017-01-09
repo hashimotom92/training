@@ -20,6 +20,7 @@
   with_items:
     - mysql56-server
     - mysql56
+    - MySQL-python
 
 - name: mysql-server service start
   service:
