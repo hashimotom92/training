@@ -4,3 +4,4 @@
  zoneinfo_path: "/usr/share/zoneinfo/Asia/Tokyo"
 
  zabbix_version: "2.4"
+ zabbix_password: "your password"
