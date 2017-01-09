@@ -29,16 +29,13 @@
     enabled: yes
 
 - name: check zabbix database
-  command: mysql -u root -e "show databases;" | grep zabbix
+  shell: mysql -u root -e "show databases;" | grep zabbix
   register: result
-- name: debug 1
-  debug: var=result
-- name: debug 2
-  debug: var=result.stdout
 
 - name: create zabbix database
   command: mysql -u root -e \
            "create database zabbix character set utf8 collate utf8_bin;"
+  when: result.stdout != "zabbix"
 
 - name: permission setting for zabbix
   command: mysql -u root -e \
